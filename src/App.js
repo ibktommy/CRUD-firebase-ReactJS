@@ -30,7 +30,17 @@ function App() {
   }, [])
 
   return (
-    <h1>CRUD APP: REACT/FIREBASE</h1>
+    <div className='container'>
+      {
+        users.map((user) => (
+          <div key={user.id}>
+            <h4>{user.name}</h4>
+            <p>{user.age}</p>
+            <p>{user.hobby}</p>
+          </div>
+        ))
+      }
+    </div>
   );
 }
 
