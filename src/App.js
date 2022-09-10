@@ -9,15 +9,20 @@ function App() {
   // Getting Data-Collection from cloud-firestore
   const usersCollectionRef = collection(db, "users")
 
+  // Function to Get Data from Cloud-Firestore
+  const getUsers = async () => {
+    try {
+      const usersCloudData = await getDocs(usersCollectionRef)
+      console.log(usersCloudData)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   // UseEffect Hook Functionality that runs after the component renders
   useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef)
-      console.log(data)
-    }
-
     getUsers()
-  }, [usersCollectionRef])
+  }, [])
 
   return (
     <h1>CRUD APP: REACT/FIREBASE</h1>
