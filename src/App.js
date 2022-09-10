@@ -14,6 +14,11 @@ function App() {
     try {
       const usersCloudData = await getDocs(usersCollectionRef)
       console.log(usersCloudData)
+
+      // Add data from Cloud-Firestore to Users-App-State
+      setUsers(usersCloudData.docs.map((userDoc) => {
+        return { ...userDoc.data(), id: userDoc.id }
+      }))
     } catch (error) {
       console.log(error.message)
     }
