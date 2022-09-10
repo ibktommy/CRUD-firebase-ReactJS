@@ -14,8 +14,9 @@ html {
   width: 100vw;
   padding: 5rem;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: column;
+  flex-direction: column;
 }
 
 .container div {
@@ -32,6 +33,17 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
+}
+
+
+.container input {
+  max-width: 40rem;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.container button {
+  display: inline-block;
+  width: 30rem;
+  margin: 0 auto;
 }

@@ -30,10 +30,14 @@ function App() {
   }, [])
 
   return (
-    <div className='container row-flex'>
+    <div className='container'>
+      <input type="text" placeholder='Enter Name' />
+      <input type="number" placeholder='Enter Age' />
+      <input type="text" placeholder='Enter Hobby' />
+      <button>Create User</button>
       {
         users.map((user) => (
-          <div key={user.id}>
+          <div key={user.id} className='row-flex'>
             <h4>{user.name}</h4>
             <p>{user.age}</p>
             <p>{user.hobby}</p>
