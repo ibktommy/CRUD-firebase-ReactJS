@@ -30,7 +30,7 @@ function App() {
   }, [])
 
   return (
-    <div className='container'>
+    <div className='container row-flex'>
       {
         users.map((user) => (
           <div key={user.id}>
