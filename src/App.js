@@ -38,9 +38,9 @@ function App() {
       {
         users.map((user) => (
           <div key={user.id} className='row-flex'>
-            <h4>{user.name}</h4>
-            <p>{user.age}</p>
-            <p>{user.hobby}</p>
+            <h4>Name: {user.name}</h4>
+            <p>Age: {user.age}</p>
+            <p>Hobby: {user.hobby}</p>
           </div>
         ))
       }
