@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
 	addDoc,
 	collection,
+	deleteDoc,
 	doc,
 	getDocs,
 	updateDoc,
@@ -54,6 +55,11 @@ function App() {
 		await updateDoc(userDoc, newAge);
 	};
 
+	// Function To Delete Data
+	const deleteData = async (id) => {
+		await deleteDoc(doc(db, "users", id));
+	};
+
 	// UseEffect Hook Functionality that runs after the component renders
 	useEffect(() => {
 		getUsers();
@@ -89,6 +95,7 @@ function App() {
 					<button onClick={() => editAge(user.id, user.age)}>
 						Increase Age
 					</button>
+					<button onClick={() => deleteData(user.id)}>Delete User</button>
 				</div>
 			))}
 		</div>
