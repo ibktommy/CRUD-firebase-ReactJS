@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 
 function App() {
 	// App State
 	const [users, setUsers] = useState([]);
-	const [username, setUsername] = useState();
+	const [username, setUsername] = useState("");
 	const [userAge, setUserAge] = useState(0);
 	const [userHobby, setUserHobby] = useState("");
 
@@ -16,8 +16,6 @@ function App() {
 	const getUsers = async () => {
 		try {
 			const usersCloudData = await getDocs(usersCollectionRef);
-			console.log(usersCloudData);
-
 			// Add data from Cloud-Firestore to Users-App-State
 			setUsers(
 				usersCloudData.docs.map((userDoc) => {
@@ -28,8 +26,18 @@ function App() {
 			console.log(error.message);
 		}
 	};
-	// Function To Create Data
-	const createUser = async () => {};
+
+	// Function To Add Data To Cloud Firestore
+	const createUser = async () => {
+    await addDoc(usersCollectionRef, {
+      name: username,
+      age: userAge,
+      hobby: userHobby,
+    })
+    setUserAge(0);
+		setUsername("");
+		setUserHobby("");
+  };
 
 	// UseEffect Hook Functionality that runs after the component renders
 	useEffect(() => {
@@ -57,7 +65,7 @@ function App() {
 				onChange={(e) => setUserHobby(e.target.value)}
 			/>
 			<button onClick={createUser}>Create User</button>
-      
+
 			{users.map((user) => (
 				<div key={user.id} className="row-flex">
 					<h4>Name: {user.name}</h4>
