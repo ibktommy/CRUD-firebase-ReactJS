@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	doc,
+	getDocs,
+	updateDoc,
+} from "firebase/firestore";
 import { db } from "./firebase";
 
 function App() {
@@ -29,15 +35,24 @@ function App() {
 
 	// Function To Add Data To Cloud Firestore
 	const createUser = async () => {
-    await addDoc(usersCollectionRef, {
-      name: username,
-      age: userAge,
-      hobby: userHobby,
-    })
-    setUserAge(0);
+		await addDoc(usersCollectionRef, {
+			name: username,
+			age: Number(userAge),
+			hobby: userHobby,
+		});
+		setUserAge(0);
 		setUsername("");
 		setUserHobby("");
-  };
+	};
+
+	// Function To Update Data
+	const editAge = async (id, prevAge) => {
+		// Referencing the User data by ID
+		const userDoc = doc(db, "users", id);
+		let newAge = { age: prevAge + 1 };
+
+		await updateDoc(userDoc, newAge);
+	};
 
 	// UseEffect Hook Functionality that runs after the component renders
 	useEffect(() => {
@@ -71,6 +86,9 @@ function App() {
 					<h4>Name: {user.name}</h4>
 					<p>Age: {user.age}</p>
 					<p>Hobby: {user.hobby}</p>
+					<button onClick={() => editAge(user.id, user.age)}>
+						Increase Age
+					</button>
 				</div>
 			))}
 		</div>
