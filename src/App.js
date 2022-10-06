@@ -36,11 +36,12 @@ function App() {
 
 	// Function To Add Data To Cloud Firestore
 	const createUser = async () => {
-		await addDoc(usersCollectionRef, {
+    let newUser = {
 			name: username,
 			age: Number(userAge),
 			hobby: userHobby,
-		});
+		};
+		await addDoc(usersCollectionRef, newUser);
 		setUserAge(0);
 		setUsername("");
 		setUserHobby("");
